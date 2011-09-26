@@ -20,6 +20,7 @@
     <modules>
         <module>jsonschema2pojo-cli</module>
         <module>jsonschema2pojo-core</module>
+        <module>jsonschema2pojo-m2e-connector</module>
         <module>jsonschema2pojo-maven-plugin</module>
         <module>jsonschema2pojo-integration-tests</module>
     </modules>
