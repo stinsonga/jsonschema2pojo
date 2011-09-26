@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>jsonschema2pojo</artifactId>
+        <artifactId>jsonschema2pojo-m2e-connector</artifactId>
         <groupId>com.googlecode.jsonschema2pojo</groupId>
         <version>0.1.11-SNAPSHOT</version>
     </parent>
