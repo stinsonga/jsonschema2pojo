@@ -61,6 +61,8 @@ public class Arguments implements GenerationConfig {
      *            the command line arguments
      * @return an instance of the parsed arguments object
      */
+    @edu.umd.cs.findbugs.annotations.SuppressWarnings(value = "NP_ALWAYS_NULL", 
+            justification = "Findbugs bug: false positive when using System.err, http://old.nabble.com/-FB-Discuss--Problems-with-false(-)positive-on-System.out.println-td30586499.html")
     public Arguments parse(String[] args) {
 
         JCommander jCommander = new JCommander(this);

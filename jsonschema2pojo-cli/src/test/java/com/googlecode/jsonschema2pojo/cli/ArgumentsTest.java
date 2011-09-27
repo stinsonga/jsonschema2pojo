@@ -109,15 +109,15 @@ public class ArgumentsTest {
     }
 
     private static class ArgsForTest extends Arguments {
-        private Capture<Integer> status = new Capture<Integer>();
+        private Capture<Integer> statusCapture = new Capture<Integer>();
 
         @Override
         protected void exit(int status) {
-            this.status.setValue(status);
+            this.statusCapture.setValue(status);
         }
 
         public Capture<Integer> getStatus() {
-            return status;
+            return statusCapture;
         }
 
     }
