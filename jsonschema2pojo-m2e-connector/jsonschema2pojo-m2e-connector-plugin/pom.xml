@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>jsonschema2pojo-m2e-connector-plugin</artifactId>
+    <packaging>eclipse-plugin</packaging>
     
     <name>jsonschema2pojo-m2e-connector-plugin</name>
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.m2e.core.projectConfigurators">
+      <configurator
+            class="com.googlecode.jsonschema2pojo.m2e.Jsonschema2PojoConfigurator"
+            id="com.googlecode.jsonschema2pojo.m2e.jsonschema2PojoConfigurator"
+            name="jsonschema2pojo Configurator">
+      </configurator>
+   </extension>
+   <extension
+         point="org.eclipse.m2e.core.lifecycleMappingMetadataSource">
+   </extension>
+</plugin>
