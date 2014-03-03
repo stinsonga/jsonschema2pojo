@@ -16,22 +16,23 @@
 
 package org.jsonschema2pojo.rules;
 
+import static org.apache.commons.lang3.ArrayUtils.*;
+import static org.apache.commons.lang3.StringUtils.*;
 import static org.jsonschema2pojo.rules.PrimitiveTypes.*;
 
 import java.io.Serializable;
 import java.lang.reflect.Modifier;
 
-import static org.apache.commons.lang3.StringUtils.*;
-import static org.apache.commons.lang3.ArrayUtils.*;
-
 import javax.annotation.Generated;
-
-import com.fasterxml.jackson.databind.JsonNode;
 
 import org.jsonschema2pojo.Schema;
 import org.jsonschema2pojo.SchemaMapper;
 import org.jsonschema2pojo.exception.ClassAlreadyExistsException;
+import org.jsonschema2pojo.util.ParcelableHelper;
 
+import android.os.Parcelable;
+
+import com.fasterxml.jackson.databind.JsonNode;
 import com.sun.codemodel.JAnnotationUse;
 import com.sun.codemodel.JBlock;
 import com.sun.codemodel.JClass;
@@ -55,9 +56,11 @@ import com.sun.codemodel.JVar;
 public class ObjectRule implements Rule<JPackage, JType> {
 
     private final RuleFactory ruleFactory;
+    private final ParcelableHelper parcelableHelper;
 
-    protected ObjectRule(RuleFactory ruleFactory) {
+    protected ObjectRule(RuleFactory ruleFactory, ParcelableHelper parcelableHelper) {
         this.ruleFactory = ruleFactory;
+        this.parcelableHelper = parcelableHelper;
     }
 
     /**
@@ -114,6 +117,10 @@ public class ObjectRule implements Rule<JPackage, JType> {
             addEquals(jclass);
         }
 
+        if (ruleFactory.getGenerationConfig().isIncludeJsr303Annotations()) {
+            addParcelSupport(jclass);
+        }
+        
         if (node.has("javaInterfaces")) {
             addInterfaces(jclass, node.get("javaInterfaces"));
         }
@@ -122,6 +129,14 @@ public class ObjectRule implements Rule<JPackage, JType> {
 
         return jclass;
 
+    }
+
+    private void addParcelSupport(JDefinedClass jclass) {
+        jclass._implements(Parcelable.class);
+        
+        parcelableHelper.addWriteToParcel(jclass);
+        parcelableHelper.addDescribeContents(jclass);
+        parcelableHelper.addCreator(jclass);
     }
 
     /**
